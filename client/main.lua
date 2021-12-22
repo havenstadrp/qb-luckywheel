@@ -34,12 +34,15 @@ end)
 
 CreateThread(function()
     while true do
-        if vehicle then
+        local sleep = 500
+        local coords = GetEntityCoords(PlayerPedId())
+        if #(coords - vector3(vehPos.x, vehPos.y, vehPos.z)) < 20 and vehicle then
+            sleep = 5
             local _heading = GetEntityHeading(vehicle)
             local _z = _heading - 0.3
             SetEntityHeading(vehicle, _z)
         end
-        Wait(5)
+        Wait(sleep)
     end
 end)
 
@@ -133,13 +136,15 @@ end
 -- 3D Text
 CreateThread(function()
     while true do
-        Wait(5)
+        local sleep = 500
         local coords = GetEntityCoords(PlayerPedId())
         if #(coords - vector3(wheelPos.x, wheelPos.y, wheelPos.z)) < 1.5 and not isRolling then
+            sleep = 5
             QBCore.Functions.DrawText3D(wheelPos.x, wheelPos.y, wheelPos.z + 1, 'Press ~g~E~w~ To Try Your Luck On The Wheel')
             if IsControlJustReleased(0, 38) then
                 doRoll()
             end
         end
+        Wait(sleep)
     end
 end)
