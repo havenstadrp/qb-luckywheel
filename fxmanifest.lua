@@ -4,7 +4,7 @@ game 'gta5'
 
 author 'ItsANoBrainer'
 description 'Casino Lucky Wheel'
-version '1.0.0'
+version '1.0.3'
 
 client_script 'client/main.lua'
 server_script 'server/main.lua'
