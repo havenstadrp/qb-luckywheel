@@ -19,4 +19,4 @@ Fork of esx_tpnrp_luckywheel to work with [QBCore](https://github.com/qbcore-fra
 
 ### Example:
 
-![](https://i.imgur.com/aoYG0Ge.mp4)
+[![Example](https://res.cloudinary.com/marcomontalbano/image/upload/v1641275520/video_to_markdown/images/video--7afa05d50e0ecd661f2a1a23fe9bc798-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://i.imgur.com/aoYG0Ge.mp4 "Example")
