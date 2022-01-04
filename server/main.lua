@@ -1,7 +1,17 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local isRoll = false
-local amount = Config.Amount
 local car = false
+
+QBCore.Functions.CreateCallback('qb-luckywheel:CheckCanSpin', function(source, cb)
+    local source = source
+    local xPlayer = QBCore.Functions.GetPlayer(source)
+    local chips = xPlayer.Functions.GetItemByName('casinochips')
+    if chips and chips.amount >= Config.Amount and isRoll == false then
+        cb(true)
+    else
+        cb(false)
+    end
+end)
 
 RegisterNetEvent('qb-luckywheel:server:getLucky', function()
     local source = source
@@ -9,8 +19,8 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
     if not isRoll then
         if xPlayer then
             local chips = xPlayer.Functions.GetItemByName('casinochips')
-            if chips and chips.amount >= amount then
-                xPlayer.Functions.RemoveItem('casinochips', amount)
+            if chips and chips.amount >= Config.Amount then
+                xPlayer.Functions.RemoveItem('casinochips', Config.Amount)
                 isRoll = true
 
                 local _randomPrice = math.random(1, 100)
@@ -124,28 +134,26 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
                         xPlayer.Functions.AddItem('weapon_pistol50', 1)
                         TriggerClientEvent('QBCore:Notify', source, 'You Won A .50 Pistol!', 'success')
                     elseif _priceIndex == 19 then
-                        TriggerClientEvent('qb-luckywheel:client:winCar', source)
-                        car = true
+                        if Config.GiveCarOnWin then 
+                            TriggerClientEvent('qb-luckywheel:client:winCar', source)
+                            car = true
+                        else
+                            TriggerClientEvent('qb-luckywheel:client:winCarEmail', source)
+                        end
                     end
                     TriggerClientEvent('qb-luckywheel:client:rollFinished', -1)
                 end)
                 TriggerClientEvent('qb-luckywheel:client:doRoll', -1, _priceIndex)
             else
-                TriggerClientEvent('qb-luckywheel:client:rollFinished', -1)    
-                TriggerClientEvent('QBCore:Notify', source, 'You Need '..amount..' Chips To Spin!', 'error')
+                TriggerClientEvent('QBCore:Notify', source, 'You Need '..Config.Amount..' Chips To Spin!', 'error')
             end
         end
     end
 end)
 
-    
-
 RegisterNetEvent('qb-luckywheel:server:carRedeem', function(vehicleProps)
     local source = source
-    veh = Config.Vehicle
-    storedGarage = 'caears242'
 
-    stateVehicle = 1
     local xPlayer = QBCore.Functions.GetPlayer(source)
     local plate = 'CSNO'
     local getPlate = true
@@ -169,12 +177,12 @@ RegisterNetEvent('qb-luckywheel:server:carRedeem', function(vehicleProps)
         exports.oxmysql:insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, garage, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', {
             xPlayer.PlayerData.license,
             xPlayer.PlayerData.citizenid,
-            veh,
-            `veh`,
+            Config.Vehicle,
+            `Config.Vehicle`,
             vehiclePropsjson,
             vehicleProps.plate,
-            storedGarage,
-            stateVehicle
+            'motelgarage',
+            1
         })
     else
         --can ban here, would be a modder triggering event to get a free car
