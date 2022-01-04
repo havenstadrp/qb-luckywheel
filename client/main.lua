@@ -285,6 +285,6 @@ RegisterNetEvent('qb-luckywheel:client:winCarEmail', function()
     TriggerServerEvent('qb-phone:server:sendNewMail', {
         sender = 'The Diamond Casino',
         subject = 'Your new car!',
-        message = 'Your new car is waiting for you at the Caears 24 Parking!',
+        message = 'Your new car is waiting for you at the Motel Parking!',
     })
 end)
