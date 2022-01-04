@@ -2,15 +2,15 @@
 ----   Variables   ----
 -----------------------
 local QBCore = exports['qb-core']:GetCoreObject()
+local CasinoInteriorID = GetInteriorAtCoords(943.0232, 35.4403, 71.8337)
 
 local videoWallRenderTarget = nil
-local showBigWin            = false
-
 local pedestalVehicle = nil
 local pedestal = nil
 local luckywheel = nil
 
 local inCasino = false
+local showBigWin = false
 local isRolling = false
 
 -----------------------
@@ -20,10 +20,11 @@ local isRolling = false
 -- Inside/Outside Casino state management without polyzone =D
 CreateThread(function()
     while true do
-        if inCasino == false and GetInteriorFromEntity(PlayerPedId()) == Config.CasinoInteriorID then
+        local playerInterior = GetInteriorFromEntity(PlayerPedId())
+        if inCasino == false and playerInterior == CasinoInteriorID then
             inCasino = true
             startCasinoThreads()
-        elseif inCasino == true and GetInteriorFromEntity(PlayerPedId()) ~= Config.CasinoInteriorID then
+        elseif inCasino == true and playerInterior ~= CasinoInteriorID then
             inCasino = false
         end
         Wait(1000)
@@ -56,7 +57,7 @@ CreateThread(function()
             local coords = GetEntityCoords(PlayerPedId())
             if #(coords - vector3(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z)) < 1.5 and not isRolling then
                 sleep = 5
-                QBCore.Functions.DrawText3D(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z + 1, 'Press ~g~E~w~ To Try Your Luck On The Wheel')
+                QBCore.Functions.DrawText3D(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z + 1, '[~g~E~w~] Spin Wheel ('..Config.Amount..' Chips)')
                 if IsControlJustReleased(0, 38) then
                     doRoll()
                 end
