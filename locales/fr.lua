@@ -1,10 +1,7 @@
 local Translations = {
 
         need_chips = 'Vous avez besoin de %{Chipsamount} jetons pour tourner la roue!',
-
-
         You_Won = 'Vous avez gagné %{prize}',
-
         pistol = 'un calibre .50!',
         cash = '$300,000 en Cash!',
         Marked = 'des billets marqués!',
@@ -15,8 +12,7 @@ local Translations = {
         Spin_Wheel = 'Tourner la roue: %{wheel_amount} jetons',
         sender = 'The Diamond Casino',
         subject = 'Votre nouvelle voiture!',
-        message = 'Félicitations ! Vous avez gagné une %{vehicule} \nNe supprimez pas ce mail et faites une demande (avec une photo de ce mail) au gouvernement pour la recevoir! \nCID = %{PCID}',
-
+        message = 'Votre nouvelle voiture vous attend au Parking du Motel!'
 }
 
 Lang = Locale:new({
