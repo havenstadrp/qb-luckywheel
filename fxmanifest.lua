@@ -12,7 +12,7 @@ server_script 'server/main.lua'
 shared_scripts {
     'config.lua',
     '@qb-core/shared/locale.lua',
-    'locales/fr.lua' -- Change this to your preferred language
+    'locales/en.lua' -- Change this to your preferred language
 }
 dependencies {
     '/gameBuild:h4'
