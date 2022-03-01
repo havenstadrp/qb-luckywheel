@@ -5,7 +5,7 @@ local car = false
 QBCore.Functions.CreateCallback('qb-luckywheel:CheckCanSpin', function(source, cb)
     local source = source
     local xPlayer = QBCore.Functions.GetPlayer(source)
-    local chips = xPlayer.Functions.GetItemByName('casinochips')
+    local chips = xPlayer.Functions.GetItemByName('casino_goldchip')
     if chips and chips.amount >= Config.Amount and isRoll == false then
         cb(true)
     else
@@ -18,9 +18,9 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
     local xPlayer = QBCore.Functions.GetPlayer(source)
     if not isRoll then
         if xPlayer then
-            local chips = xPlayer.Functions.GetItemByName('casinochips')
+            local chips = xPlayer.Functions.GetItemByName('casino_goldchip')
             if chips and chips.amount >= Config.Amount then
-                xPlayer.Functions.RemoveItem('casinochips', Config.Amount)
+                xPlayer.Functions.RemoveItem('casino_goldchip', Config.Amount)
                 isRoll = true
 
                 local _randomPrice = math.random(1, 100)
@@ -95,7 +95,7 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
                     isRoll = false
                     -- Give Price
                     if _priceIndex == 1 or _priceIndex == 9 or _priceIndex == 13 or _priceIndex == 17 then
-                        xPlayer.Functions.AddItem('casinochips', 25000)
+                        xPlayer.Functions.AddItem('casino_whitechip', 25000)
                         TriggerClientEvent('QBCore:Notify', source, 'You Won 25,000 Casino Chips!', 'success')
                     elseif _priceIndex == 2 or _priceIndex == 6 or _priceIndex == 10 or _priceIndex == 14 or _priceIndex == 18 then
                         xPlayer.Functions.AddItem('sandwich', 10)
@@ -131,8 +131,8 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
                         xPlayer.Functions.AddMoney('cash', 300000)
                         TriggerClientEvent('QBCore:Notify', source, 'You Won $300,000 Cash!', 'success')
                     elseif _priceIndex == 12 then
-                        xPlayer.Functions.AddItem('weapon_pistol50', 1)
-                        TriggerClientEvent('QBCore:Notify', source, 'You Won A .50 Pistol!', 'success')
+                        xPlayer.Functions.AddItem('repairkit', 2)
+                        TriggerClientEvent('QBCore:Notify', source, 'You Won 2 repairkits!', 'success')
                     elseif _priceIndex == 19 then
                         if Config.GiveCarOnWin then 
                             TriggerClientEvent('qb-luckywheel:client:winCar', source)
