@@ -235,8 +235,9 @@ end
 
 function doRoll()
     if not isRolling then
-        QBCore.Functions.TriggerCallback('qb-luckywheel:CheckCanSpin', function(canSpin)
-            if canSpin then
+        QBCore.Functions.TriggerCallback('qb-luckywheel:CheckCanSpin', function(canSpin, reason)
+            print(reason)
+            if reason == nil and canSpin then
                 isRolling = true
                 local playerPed = PlayerPedId()
                 local _lib = 'anim_casino_a@amb@casino@games@lucky7wheel@female'
@@ -270,8 +271,10 @@ function doRoll()
                 end
                 TriggerServerEvent('qb-luckywheel:server:getLucky')
                 TaskPlayAnim(playerPed, lib, 'armraisedidle_to_spinningidle_high', 8.0, -8.0, -1, 0, 0, false, false, false)
+            elseif reason == 'chips' then
+                    TriggerEvent('QBCore:Notify', 'You Need '..Config.Amount..' Chips To Spin!', 'error')
             else
-                TriggerEvent('QBCore:Notify', Lang:t('need_chips', {Chipsamount = Config.Amount}), 'error')
+                TriggerEvent('QBCore:Notify', 'Please, come back later to try your Luck on our LuckyWheel!', 'error')
             end
         end)
     end
@@ -290,3 +293,4 @@ RegisterNetEvent('qb-luckywheel:client:winCarEmail', function()
         message = Lang:t('message', {vehicule = vehicle, PCID = CID}),
     })
 end)
+
