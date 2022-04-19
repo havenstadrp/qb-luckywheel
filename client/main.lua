@@ -46,7 +46,7 @@ CreateThread(function()
                         type = "client",
                         event = "qb-luckywheel:spinwheel",
                         icon = "fas fa-redo",
-                        label = "Spin Wheel ("..Config.Amount.." Chips)",
+                        label = Lang:t('Spin_Wheel', {wheel_amount = Config.Amount}),
                     },
                 },
                 distance = 2.5
@@ -57,7 +57,7 @@ CreateThread(function()
             local coords = GetEntityCoords(PlayerPedId())
             if #(coords - vector3(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z)) < 1.5 and not isRolling then
                 sleep = 5
-                QBCore.Functions.DrawText3D(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z + 1, '[~g~E~w~] Spin Wheel ('..Config.Amount..' Chips)')
+                QBCore.Functions.DrawText3D(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z + 1, '[~g~E~w~]'..Lang:t('Spin_Wheel', {wheel_ammount = Config.Amount}))
                 if IsControlJustReleased(0, 38) then
                     doRoll()
                 end
@@ -286,10 +286,11 @@ RegisterNetEvent('qb-luckywheel:client:winCar', function()
 end)
 
 RegisterNetEvent('qb-luckywheel:client:winCarEmail', function()
+    local CID = QBCore.Functions.GetPlayer(src).PlayerData.citizenid
     TriggerServerEvent('qb-phone:server:sendNewMail', {
-        sender = 'The Diamond Casino',
-        subject = 'Your new car!',
-        message = 'Your new car is waiting for you at the Motel Parking!',
+        sender =  Lang:t('sender'),
+        subject = Lang:t('subject'),
+        message = Lang:t('message', {vehicule = vehicle, PCID = CID}),
     })
 end)
 
