@@ -272,9 +272,9 @@ function doRoll()
                 TriggerServerEvent('qb-luckywheel:server:getLucky')
                 TaskPlayAnim(playerPed, lib, 'armraisedidle_to_spinningidle_high', 8.0, -8.0, -1, 0, 0, false, false, false)
             elseif reason == 'chips' then
-                    TriggerEvent('QBCore:Notify', 'You Need '..Config.Amount..' Chips To Spin!', 'error')
+                    TriggerEvent('QBCore:Notify',Lang:t('error.need_chips', {Chipsamount = Config.Amount}), 'error')
             else
-                TriggerEvent('QBCore:Notify', 'Please, come back later to try your Luck on our LuckyWheel!', 'error')
+                TriggerEvent('QBCore:Notify', Lang:t('error.time'), 'error')
             end
         end)
     end
@@ -290,7 +290,7 @@ RegisterNetEvent('qb-luckywheel:client:winCarEmail', function()
     TriggerServerEvent('qb-phone:server:sendNewMail', {
         sender =  Lang:t('sender'),
         subject = Lang:t('subject'),
-        message = Lang:t('message', {vehicule = vehicle, PCID = CID}),
+        message = Lang:t('message'),
     })
 end)
 
