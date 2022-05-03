@@ -57,7 +57,7 @@ CreateThread(function()
             local coords = GetEntityCoords(PlayerPedId())
             if #(coords - vector3(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z)) < 1.5 and not isRolling then
                 sleep = 5
-                QBCore.Functions.DrawText3D(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z + 1, '[~g~E~w~]'..Lang:t('general.Spin_Wheel', {wheel_ammount = Config.Amount}))
+                QBCore.Functions.DrawText3D(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z + 1, '[~g~E~w~]'..Lang:t('general.Spin_Wheel', {wheel_amount = Config.Amount}))
                 if IsControlJustReleased(0, 38) then
                     doRoll()
                 end
