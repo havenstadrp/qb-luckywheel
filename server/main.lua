@@ -6,7 +6,7 @@ local spinTable = {}
 QBCore.Functions.CreateCallback('qb-luckywheel:CheckCanSpin', function(source, cb)
     local source = source
     local xPlayer = QBCore.Functions.GetPlayer(source)
-    local chips = xPlayer.Functions.GetItemByName('casinochips')
+    local chips = xPlayer.Functions.GetItemByName('casino_goldchip')
 
     if chips and chips.amount >= Config.Amount and isRoll == false then
         if spinTable[xPlayer.PlayerData.citizenid] then
@@ -110,7 +110,7 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
                     if _priceIndex == 1 or _priceIndex == 9 or _priceIndex == 13 or _priceIndex == 17 then
                         xPlayer.Functions.AddItem('casino_whitechip', 25000)
                         TriggerClientEvent('QBCore:Notify', source, 'You Won 25,000 Casino Chips!', 'success')
-                        xPlayer.Functions.AddItem('casinochips', 250)
+                        xPlayer.Functions.AddItem('casino_redchip', 250)
                         TriggerClientEvent('QBCore:Notify', source, Lang:t('You_Won', {prize = Lang:t('chips')}), 'success')
                     elseif _priceIndex == 2 or _priceIndex == 6 or _priceIndex == 10 or _priceIndex == 14 or _priceIndex == 18 then
                         xPlayer.Functions.AddItem('sandwich', 10)
