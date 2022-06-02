@@ -37,7 +37,7 @@ CreateThread(function()
         exports['qb-target']:AddBoxZone("CasinoLuckyWheel", vector3(949.6, 44.88, 71.64), 2.8, 0.2, {
             name = "CasinoLuckyWheel",
             heading = 58.0,
-            debugPoly = false,
+            debugPoly = true,
             minZ=70.84,
             maxZ=73.44
             }, {
