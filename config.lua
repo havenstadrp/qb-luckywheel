@@ -8,6 +8,7 @@ Config.VehPos = vector4(975.742, 40.28, 71.525, 0.0)       -- Position for vehic
 Config.UseThirdEyeInteraction = false
 Config.GiveCarOnWin = true
 Config.SpinCooldown = 120                                  -- Minutes
+Config.ChipType = "casino_goldchip"
 
 -- CASINO_DIA_PL    - Falling Diamonds
 -- CASINO_HLW_PL    - Falling Skulls

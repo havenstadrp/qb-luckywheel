@@ -57,7 +57,7 @@ CreateThread(function()
             local coords = GetEntityCoords(PlayerPedId())
             if #(coords - vector3(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z)) < 1.5 and not isRolling then
                 sleep = 5
-                QBCore.Functions.DrawText3D(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z + 1, '[~g~E~w~]'..Lang:t('Spin_Wheel', {wheel_ammount = Config.Amount}))
+                QBCore.Functions.DrawText3D(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z + 1, '[~g~E~w~] '..Lang:t('Spin_Wheel', {wheel_ammount = Config.Amount}))
                 if IsControlJustReleased(0, 38) then
                     doRoll()
                 end
@@ -249,7 +249,7 @@ function doRoll()
                     RequestAnimDict(lib)
                     Wait(100)
                 end
-                local _movePos = vector3(948.32, 45.14, 71.64)
+                local _movePos = vector3(988.8680, 43.05055, 71.64)
                 TaskGoStraightToCoord(playerPed, _movePos.x, _movePos.y, _movePos.z, 1.0, -1, 312.2, 0.0)
                 local _isMoved = false
                 while not _isMoved do

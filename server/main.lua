@@ -6,7 +6,7 @@ local spinTable = {}
 QBCore.Functions.CreateCallback('qb-luckywheel:CheckCanSpin', function(source, cb)
     local source = source
     local xPlayer = QBCore.Functions.GetPlayer(source)
-    local chips = xPlayer.Functions.GetItemByName('casino_goldchip')
+    local chips = xPlayer.Functions.GetItemByName(Config.ChipType)
 
     if chips and chips.amount >= Config.Amount and isRoll == false then
         if spinTable[xPlayer.PlayerData.citizenid] then
@@ -30,9 +30,9 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
     local xPlayer = QBCore.Functions.GetPlayer(source)
     if not isRoll then
         if xPlayer then
-            local chips = xPlayer.Functions.GetItemByName('casino_goldchip')
+            local chips = xPlayer.Functions.GetItemByName(Config.ChipType)
             if chips and chips.amount >= Config.Amount then
-                xPlayer.Functions.RemoveItem('casino_goldchip', Config.Amount)
+                xPlayer.Functions.RemoveItem(Config.ChipType, Config.Amount)
                 isRoll = true
 
                 local _randomPrice = math.random(1, 100)
@@ -79,7 +79,6 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
                     -- 1, 9, 13, 17
                     local _sRan = math.random(1, 4)
                     if _sRan == 1 then
-              
                         _priceIndex = 1
                     elseif _sRan == 2 then
                         _priceIndex = 9
@@ -111,11 +110,11 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
                         xPlayer.Functions.AddItem('casino_whitechip', 25000)
                         TriggerClientEvent('QBCore:Notify', source, 'You Won 25,000 Casino Chips!', 'success')
                         xPlayer.Functions.AddItem('casino_redchip', 250)
-                        TriggerClientEvent('QBCore:Notify', source, Lang:t('You_Won', {prize = Lang:t('chips')}), 'success')
+                        TriggerClientEvent('QBCore:Notify', source, Lang:t('you_won', {prize = Lang:t('chips')}), 'success')
                     elseif _priceIndex == 2 or _priceIndex == 6 or _priceIndex == 10 or _priceIndex == 14 or _priceIndex == 18 then
                         xPlayer.Functions.AddItem('sandwich', 10)
                         xPlayer.Functions.AddItem('water_bottle', 24)
-                        TriggerClientEvent('QBCore:Notify', source, Lang:t('You_Won', {prize = Lang:t('sandwich_water')}), 'success')
+                        TriggerClientEvent('QBCore:Notify', source, Lang:t('you_won', {prize = Lang:t('sandwich_water')}), 'success')
                     elseif _priceIndex == 3 or _priceIndex == 7 or _priceIndex == 15 or _priceIndex == 20 then
                         local _money = 0
                         if _priceIndex == 3 then
@@ -128,7 +127,7 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
                             _money = 5000
                         end
                         xPlayer.Functions.AddMoney('cash', _money)
-                        TriggerClientEvent('QBCore:Notify', source, Lang:t('You_Won', {prize = Lang:t('money', {money_amount = _money})}), 'success')
+                        TriggerClientEvent('QBCore:Notify', source, Lang:t('you_won', {prize = Lang:t('money', {money_amount = _money})}), 'success')
                     elseif _priceIndex == 4 or _priceIndex == 8 or _priceIndex == 11 or _priceIndex == 16 then
                         local _blackMoney = 0
                         if _priceIndex == 4 then
@@ -141,10 +140,10 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
                             _blackMoney = 25000
                         end
                         xPlayer.Functions.AddItem('markedbills', _blackMoney * 10)
-                        TriggerClientEvent('QBCore:Notify', source, Lang:t('You_Won', {prize = Lang:t('Marked')}), 'success')
+                        TriggerClientEvent('QBCore:Notify', source, Lang:t('you_won', {prize = Lang:t('Marked')}), 'success')
                     elseif _priceIndex == 5 then
                         xPlayer.Functions.AddMoney('cash', 30000)
-                        TriggerClientEvent('QBCore:Notify', source, Lang:t('You_Won', {prize = Lang:t('cash')}), 'success')
+                        TriggerClientEvent('QBCore:Notify', source, Lang:t('you_won', {prize = Lang:t('cash')}), 'success')
                     elseif _priceIndex == 12 then
                         xPlayer.Functions.AddItem('weapon_pistol50', 1)
                         TriggerClientEvent('QBCore:Notify', source, Lang:t("you_won", {prize = Lang:t('pistol')}), 'success')
@@ -187,7 +186,7 @@ RegisterNetEvent('qb-luckywheel:server:carRedeem', function(vehicleProps)
     local vehiclePropsjson = json.encode(vehicleProps)
     if car then
         car = false 
-        TriggerClientEvent('QBCore:Notify', source,  Lang:t('You_Won', {prize = Lang:t('car')}), 'success')
+        TriggerClientEvent('QBCore:Notify', source,  Lang:t('you_won', {prize = Lang:t('car')}), 'success')
         TriggerClientEvent('qb-luckywheel:client:winCarEmail', source)
         exports.oxmysql:insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, garage, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', {
             xPlayer.PlayerData.license,
