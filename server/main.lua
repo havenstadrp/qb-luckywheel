@@ -108,8 +108,6 @@ RegisterNetEvent('qb-luckywheel:server:getLucky', function()
                     isRoll = false
                     -- Give Price
                     if _priceIndex == 1 or _priceIndex == 9 or _priceIndex == 13 or _priceIndex == 17 then
-                        xPlayer.Functions.AddItem('casino_whitechip', 25000)
-                        TriggerClientEvent('QBCore:Notify', source, 'You Won 25,000 Casino Chips!', 'success')
                         xPlayer.Functions.AddItem('casino_redchip', 250)
                         TriggerClientEvent('QBCore:Notify', source, Lang:t('success.You_Won', {prize = Lang:t('general.chips')}), 'success')
                     elseif _priceIndex == 2 or _priceIndex == 6 or _priceIndex == 10 or _priceIndex == 14 or _priceIndex == 18 then

@@ -1,6 +1,6 @@
 local Translations = {
     error = {
-        need_chips = 'You Need %{Chipsamount} Chips To Spin!',
+        need_chips = 'You Need %{Chipsamount} red Chips To Spin!',
         time = 'Please, come back later to try your Luck on our LuckyWheel!',
     },
     success = {

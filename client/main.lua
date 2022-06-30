@@ -34,7 +34,7 @@ end)
 -- Interaction
 CreateThread(function()
     if Config.UseThirdEyeInteraction then
-        exports['qb-target']:AddBoxZone("CasinoLuckyWheel", vector3(949.6, 44.88, 71.64), 2.8, 0.2, {
+        exports['qb-target']:AddBoxZone("CasinoLuckyWheel", vector3(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z), 2.8, 0.2, {
             name = "CasinoLuckyWheel",
             heading = 58.0,
             debugPoly = true,
@@ -115,7 +115,7 @@ end)
 -----------------------
 
 function startCasinoThreads()
-    -- Screen Management 
+    -- Screen Management
     CreateThread(function()
         local lastUpdatedTvChannel = 0
         RequestStreamedTextureDict('Prop_Screen_Vinewood')
@@ -123,7 +123,7 @@ function startCasinoThreads()
         while not HasStreamedTextureDictLoaded('Prop_Screen_Vinewood') do
             Wait(100)
         end
-    
+
         RegisterNamedRendertarget('casinoscreen_01')
         LinkNamedRendertarget(`vw_vwint01_video_overlay`)
         videoWallRenderTarget = GetNamedRendertargetRenderId('casinoscreen_01')
@@ -159,7 +159,7 @@ function startCasinoThreads()
     end)
 
     -- Vehicle/Pedestal
-    CreateThread(function() 
+    CreateThread(function()
         while inCasino do
             if DoesEntityExist(pedestalVehicle) then
                 local vehHeading = GetEntityHeading(pedestalVehicle)
@@ -170,7 +170,7 @@ function startCasinoThreads()
                 while not HasModelLoaded(Config.Vehicle) do
                     Wait(0)
                 end
-        
+
                 local vehicle = CreateVehicle(Config.Vehicle, Config.VehPos.x, Config.VehPos.y, Config.VehPos.z, 0.0, false, false)
                 SetModelAsNoLongerNeeded(Config.Vehicle)
                 SetVehRadioStation(vehicle, 'OFF')
@@ -178,10 +178,10 @@ function startCasinoThreads()
                 Wait(1000)
                 SetVehicleOnGroundProperly(vehicle)
                 FreezeEntityPosition(vehicle, true)
-                
+
                 pedestalVehicle = vehicle
             end
-    
+
             if DoesEntityExist(pedestal) and DoesEntityExist(pedestalVehicle) then
                 local pedestalHeading = GetEntityHeading(pedestal)
                 local newPedestalHeading = pedestalHeading - 0.1
@@ -201,7 +201,7 @@ function startCasinoThreads()
     end)
 
     -- Wheel
-    CreateThread(function() 
+    CreateThread(function()
         if not DoesEntityExist(luckywheel) then
             luckywheel = GetClosestObjectOfType(Config.WheelPos, 10.0, Config.WheelModel, false)
             if luckywheel == 0 then
@@ -249,7 +249,7 @@ function doRoll()
                     RequestAnimDict(lib)
                     Wait(100)
                 end
-                local _movePos = vector3(948.32, 45.14, 71.64)
+                local _movePos = vector3(989.26, 42.84, 71.64)
                 TaskGoStraightToCoord(playerPed, _movePos.x, _movePos.y, _movePos.z, 1.0, -1, 312.2, 0.0)
                 local _isMoved = false
                 while not _isMoved do
