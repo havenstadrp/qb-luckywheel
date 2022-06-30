@@ -286,7 +286,6 @@ RegisterNetEvent('qb-luckywheel:client:winCar', function()
 end)
 
 RegisterNetEvent('qb-luckywheel:client:winCarEmail', function()
-    local CID = QBCore.Functions.GetPlayer(src).PlayerData.citizenid
     TriggerServerEvent('qb-phone:server:sendNewMail', {
         sender =  Lang:t('general.sender'),
         subject = Lang:t('general.subject'),
